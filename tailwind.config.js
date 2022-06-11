@@ -5,6 +5,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./App.tsx",
     "App.tsx",
+    "./types",
   ],
   // ...
 };
