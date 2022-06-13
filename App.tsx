@@ -1,12 +1,19 @@
 import { TailwindProvider } from "tailwindcss-react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import "tailwindcss-react-native/types.d";
 
 import Home from "./screens/Home";
 
 const Stack = createStackNavigator();
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "transparent",
+  },
+};
 
 export default function App() {
   const [loaded] = useFonts({
@@ -20,7 +27,7 @@ export default function App() {
 
   return (
     <TailwindProvider>
-      <NavigationContainer>
+      <NavigationContainer theme={theme}>
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
           initialRouteName="Home"
