@@ -6,10 +6,12 @@ import Top from "../components/Home/Top";
 import CurrentLesson from "../components/Home/CurrentLesson";
 import Nav from "../components/Nav";
 
+import { MainColors } from "../theme";
+
 const Home = () => {
   return (
-    <View className="bg-[#F5F7FB] flex-1">
-      <SeparatedStatusBar bg="#fff" />
+    <View className="flex-1" style={{ backgroundColor: MainColors.bgPrimary }}>
+      <SeparatedStatusBar />
       <Top />
       <View className="items-center mt-6">
         <CurrentLesson />
