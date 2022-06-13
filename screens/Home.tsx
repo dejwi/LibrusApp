@@ -1,19 +1,21 @@
-import { View, Text, SafeAreaView, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import ReloadSvg from "../assets/svgs/reload.svg";
+
+import SeparatedStatusBar from "../components/SeparatedStatusBar";
+import Top from "../components/Home/Top";
+import CurrentLesson from "../components/Home/CurrentLesson";
+import Nav from "../components/Nav";
 
 const Home = () => {
   return (
-    <SafeAreaView>
-      <Text>Witaj Dawid</Text>
-      <View>
-        <ReloadSvg width={30} height={30} fill="#000" />
-        <Text>2 godziny temu</Text>
+    <View className="bg-[#F5F7FB] flex-1">
+      <SeparatedStatusBar bg="#fff" />
+      <Top />
+      <View className="items-center mt-6">
+        <CurrentLesson />
       </View>
-
-      <StatusBar style="auto" />
-    </SafeAreaView>
+      <Nav current="Home" />
+    </View>
   );
 };
 
