@@ -8,8 +8,10 @@ import { MainColors } from "../theme";
 import moment from "moment";
 
 const Timetable = () => {
+  // week days in month
   const [currentWeek] = useCurrentWeek();
-  const [selected, setSelected] = useState(moment().date());
+  // 1-5 week day
+  const [selected, setSelected] = useState(moment().day());
 
   if (!currentWeek) return null;
   return (
@@ -20,6 +22,7 @@ const Timetable = () => {
         selected={selected}
         setSelected={(e) => setSelected(e)}
       />
+
       <Nav current="Timetable" />
     </View>
   );

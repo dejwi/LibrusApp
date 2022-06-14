@@ -10,18 +10,22 @@ interface props {
 const DaysNav: React.FC<props> = ({ days, selected, setSelected }) => {
   const daysW = ["Pon", "Wt", "Śr", "Czw", "Pt"];
 
-  const contBg = (e: number) => {
-    if (e === selected) return { backgroundColor: TimetableColors.selected };
+  const contBg = (index: number) => {
+    if (index === selected - 1)
+      return { backgroundColor: TimetableColors.selected };
     else return {};
   };
 
   return (
     <View className="flex-row justify-center gap-2">
       {days.map((e, index) => (
-        <TouchableOpacity key={"day-" + e} onPress={() => setSelected(e)}>
+        <TouchableOpacity
+          key={"day-" + e}
+          onPress={() => setSelected(index + 1)}
+        >
           <View
             className="items-center w-12 py-1.5 rounded-xl"
-            style={contBg(e)}
+            style={contBg(index)}
           >
             <Text
               style={{ color: e !== selected ? MainColors.primary : "#ffffff" }}
