@@ -5,6 +5,7 @@ import { useFonts } from "expo-font";
 import "tailwindcss-react-native/types.d";
 
 import Home from "./screens/Home";
+import Timetable from "./screens/Timetable";
 
 const Stack = createStackNavigator();
 const theme = {
@@ -33,7 +34,7 @@ export default function App() {
           initialRouteName="Home"
         >
           <Stack.Screen name="Home" component={Home} />
-          {/* <Stack.Screen name='Timetable' component={}/> */}
+          <Stack.Screen name="Timetable" component={Timetable} />
         </Stack.Navigator>
       </NavigationContainer>
     </TailwindProvider>
