@@ -28,13 +28,17 @@ const DaysNav: React.FC<props> = ({ days, selected, setSelected }) => {
             style={contBg(index)}
           >
             <Text
-              style={{ color: e !== selected ? MainColors.primary : "#ffffff" }}
+              style={{
+                color: index !== selected - 1 ? MainColors.primary : "#ffffff",
+              }}
               className="text-xs"
             >
               {daysW[index]}
             </Text>
             <Text
-              style={{ color: e !== selected ? MainColors.primary : "#ffffff" }}
+              style={{
+                color: index !== selected - 1 ? MainColors.primary : "#ffffff",
+              }}
             >
               {e}
             </Text>
