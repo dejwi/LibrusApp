@@ -4,7 +4,10 @@ import ReloadSvg from "../../assets/svgs/reload.svg";
 
 const Top = () => {
   return (
-    <View className="bg-white pb-12 ">
+    <View
+      className="bg-white pb-12 "
+      style={{ borderBottomLeftRadius: 25, borderBottomRightRadius: 25 }}
+    >
       <Text className="font-[PoppinsRegular] text-3xl mt-8 ml-1">
         Witaj Dawid
       </Text>
