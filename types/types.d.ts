@@ -1,19 +1,3 @@
-interface TableData {
-  [day: string]: LessonData[] | null[];
-}
-interface TimetableData {
-  hours: string[];
-  table: TableData;
-}
-type LessonData = {
-  title: string;
-  flag: string;
-  insideFields: {
-    firstField: string | null;
-    secondField: string | null;
-  };
-} | null;
-
 interface UserData {
   Class: string;
   Email: string;
@@ -22,4 +6,25 @@ interface UserData {
   LastName: string;
   Login: string;
   password: string;
+}
+
+type TimetableLesson = {
+  name: string;
+  room: string;
+  lessonNo: string;
+  teacher: string;
+  hourFrom: string;
+  hourTo: string;
+  isCanceled: boolean;
+  isSubstitutionClass: boolean;
+  original?: string;
+} | null;
+
+interface TimetableFreeDay {
+  isFreeDay: true;
+  name: string;
+}
+
+interface Timetable {
+  [day: string]: TimetableLesson[] | TimetableFreeDay;
 }
