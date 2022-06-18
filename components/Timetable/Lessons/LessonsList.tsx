@@ -18,7 +18,7 @@ const LessonsList: React.FC<props> = ({ data, selected }) => {
         trimmer(current as TimetableLesson[]).map((les, index) => (
           <View
             key={les !== null ? les.name + index : "null" + index}
-            className={`flex-row h-16 ${les === null && "opacity-0"}`}
+            className={`flex-row ${les === null && "opacity-0"}`}
           >
             <Hour from={les?.hourFrom || ""} to={les?.hourTo || ""} />
             {les !== null ? (
@@ -46,7 +46,7 @@ const Lesson: React.FC<props2> = ({
 }) => (
   <View
     style={{ backgroundColor: MainColors.bgSecondary, borderRadius: 6 }}
-    className="pl-4 justify-center flex-1 mr-3.5"
+    className="pl-4 justify-center flex-1 mr-3.5 py-3.5"
   >
     <Text
       className={`font-[PoppinsRegular] ${isCanceled ? "line-through" : ""}`}
