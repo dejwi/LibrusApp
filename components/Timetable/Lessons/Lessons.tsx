@@ -16,7 +16,7 @@ const Lessons: React.FC<props> = ({ selected }) => {
   }, []);
 
   return (
-    <View className="flex-1 mt-7 flex-row">
+    <View className="flex-1 mt-3.5 flex-row">
       {!!data && <LessonsList selected={selected} data={data} />}
     </View>
   );

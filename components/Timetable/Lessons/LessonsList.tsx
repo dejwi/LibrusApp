@@ -10,30 +10,38 @@ const LessonsList: React.FC<props> = ({ data, selected }) => {
 
   useEffect(() => {}, [selected]);
 
-  return (
+  return isFreeDay ? (
+    <View className="justify-center items-center flex-1">
+      <Text className="font-[PoppinsRegular] text-lg">
+        {(current as TimetableFreeDay).name}
+      </Text>
+      <Text
+        className="font-[PoppinsRegular] text-xs"
+        style={{ color: MainColors.secondary }}
+      >
+        Dzień wolny
+      </Text>
+    </View>
+  ) : (
     <ScrollView className="flex-1 gap-3.5">
-      {isFreeDay ? (
-        <Text>{(current as TimetableFreeDay).name}</Text>
-      ) : (
-        trimmer(current as TimetableLesson[]).map((les, index) => (
-          <View
-            key={les !== null ? les.name + index : "null" + index}
-            className={`flex-row ${les === null && "opacity-0"}`}
-          >
-            <Hour from={les?.hourFrom || ""} to={les?.hourTo || ""} />
-            {les !== null ? (
-              <Lesson
-                name={les.name}
-                room={les.room}
-                isCanceled={les.isCanceled}
-                isSubstitutionClass={les.isSubstitutionClass}
-              />
-            ) : (
-              <Lesson name="" room="" />
-            )}
-          </View>
-        ))
-      )}
+      {trimmer(current as TimetableLesson[]).map((les, index) => (
+        <View
+          key={les !== null ? les.name + index : "null" + index}
+          className={`flex-row ${les === null && "opacity-0"}`}
+        >
+          <Hour from={les?.hourFrom || ""} to={les?.hourTo || ""} />
+          {les !== null ? (
+            <Lesson
+              name={les.name}
+              room={les.room}
+              isCanceled={les.isCanceled}
+              isSubstitutionClass={les.isSubstitutionClass}
+            />
+          ) : (
+            <Lesson name="" room="" />
+          )}
+        </View>
+      ))}
     </ScrollView>
   );
 };
@@ -46,7 +54,7 @@ const Lesson: React.FC<props2> = ({
 }) => (
   <View
     style={{ backgroundColor: MainColors.bgSecondary, borderRadius: 6 }}
-    className="pl-4 justify-center flex-1 mr-3.5 py-3.5"
+    className="pl-4 justify-center flex-1 mr-3.5 py-3"
   >
     <Text
       className={`font-[PoppinsRegular] ${isCanceled ? "line-through" : ""}`}
