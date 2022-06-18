@@ -28,7 +28,6 @@ const Timetable = () => {
           <Lessons selected={selected} />
         </>
       )}
-      <Nav current="Timetable" />
     </View>
   );
 };

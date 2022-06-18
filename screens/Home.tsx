@@ -13,10 +13,9 @@ const Home = () => {
     <View className="flex-1" style={{ backgroundColor: MainColors.bgPrimary }}>
       <SeparatedStatusBar />
       <Top />
-      <View className="items-center mt-6">
+      <View className="items-center mt-6 flex-1">
         <CurrentLesson />
       </View>
-      <Nav current="Home" />
     </View>
   );
 };

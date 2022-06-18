@@ -9,6 +9,7 @@ import Home from "./screens/Home";
 import Timetable from "./screens/Timetable";
 import Login from "./screens/Login";
 import Loading from "./screens/Loading";
+import Nav from "./components/Nav";
 
 const Stack = createStackNavigator();
 const theme = {
@@ -41,6 +42,7 @@ export default function App() {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Timetable" component={Timetable} />
         </Stack.Navigator>
+        <Nav />
       </NavigationContainer>
     </TailwindProvider>
   );

@@ -8,47 +8,45 @@ import GradesIcon from "../assets/svgs/view-list.svg";
 
 import { NavColors } from "../theme";
 
-interface props {
-  current: "Home" | "Timetable" | "Grades";
-}
+type routes = "Home" | "Timetable" | "Grades";
 
-const Nav: React.FC<props> = ({ current }) => {
+const Nav = () => {
+  const [path, setPath] = useState<routes>("Home");
+  const navigation = useNavigation();
   const sizeHome = 36;
   const sizeSide = 26;
-  const navigation = useNavigation();
+
+  const goTo = (route: routes) => {
+    navigation.navigate(route as never);
+    setPath(route);
+  };
 
   return (
     <SafeAreaView
-      className={`absolute bottom-0 w-full`}
+      className={`w-full`}
       style={{ backgroundColor: NavColors.bg }}
     >
       <View className={`flex-row items-center justify-evenly pt-3`}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Timetable" as never)}
-        >
+        <TouchableOpacity onPress={() => goTo("Timetable")}>
           <TimetableIcon
             width={sizeSide}
             height={sizeSide}
-            fill={
-              current === "Timetable" ? NavColors.selected : NavColors.default
-            }
+            fill={path === "Timetable" ? NavColors.selected : NavColors.default}
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Home" as never)}>
+        <TouchableOpacity onPress={() => goTo("Home")}>
           <HomeIcon
             width={sizeHome}
             height={sizeHome}
-            fill={current === "Home" ? NavColors.selected : NavColors.default}
+            fill={path === "Home" ? NavColors.selected : NavColors.default}
           />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Grades" as never)}
-        >
+        <TouchableOpacity onPress={() => goTo("Home")}>
           <GradesIcon
             width={sizeSide}
             height={sizeSide}
-            fill={current === "Grades" ? NavColors.selected : NavColors.default}
+            fill={path === "Grades" ? NavColors.selected : NavColors.default}
           />
         </TouchableOpacity>
       </View>
