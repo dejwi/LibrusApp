@@ -12,7 +12,8 @@ const Timetable = () => {
   // week days in month
   const [currentWeek] = useCurrentWeek();
   // 1-5 week day
-  const [selected, setSelected] = useState(moment().day());
+  const day = moment().format("YYYY-MM-DD");
+  const [selected, setSelected] = useState(day);
 
   return (
     <View className="flex-1" style={{ backgroundColor: MainColors.bgPrimary }}>

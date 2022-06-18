@@ -5,9 +5,9 @@ import DaysNav from "./DaysNav";
 import { MainColors, TimetableColors } from "../../../theme";
 
 interface props {
-  days: number[];
-  selected: number;
-  setSelected: (e: number) => void;
+  days: string[];
+  selected: string;
+  setSelected: (e: string) => void;
 }
 const Top: React.FC<props> = ({ days, selected, setSelected }) => {
   return (

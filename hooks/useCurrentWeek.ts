@@ -2,14 +2,15 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 
 const useCurrentWeek = () => {
-  const [currentWeek, setCurrentWeek] = useState<number[]>();
+  const [currentWeek, setCurrentWeek] = useState<string[]>();
 
   useEffect(() => {
-    var currentDate = moment();
-    var weekStart = currentDate.clone().startOf("isoWeek");
-    var days = [];
-    for (var i = 0; i <= 4; i++) {
-      days.push(+moment(weekStart).add(i, "days").format("DD"));
+    const currentDate = moment();
+    const weekStart = currentDate.clone().startOf("week");
+
+    const days = [];
+    for (let i = 0; i <= 4; i++) {
+      days.push(moment(weekStart).add(i, "days").format("YYYY-MM-DD"));
     }
     setCurrentWeek(days);
   }, []);

@@ -1,19 +1,23 @@
 import { View, Text } from "react-native";
-import React from "react";
-import data from "../../../testdata/timetable.json";
+import React, { useState, useEffect } from "react";
 import LessonsList from "./LessonsList";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface props {
-  selected: number;
+  selected: string;
 }
 const Lessons: React.FC<props> = ({ selected }) => {
+  const [data, setData] = useState<Timetable>();
+
+  useEffect(() => {
+    AsyncStorage.getItem("timetable").then((tt) => {
+      if (tt) setData(JSON.parse(tt));
+    });
+  }, []);
+
   return (
     <View className="flex-1 mt-7 flex-row">
-      <LessonsList
-        selected={selected}
-        data={data.table as TableData}
-        hours={data.hours}
-      />
+      {!!data && <LessonsList selected={selected} data={data} />}
     </View>
   );
 };
