@@ -5,6 +5,7 @@ import moment from "moment";
 import "moment/locale/pl";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Librus from "librusjs/lib";
+import { useAnimationState, MotiView } from "moti";
 
 interface props {
   setGrades: (val: Grades) => void;
@@ -12,6 +13,17 @@ interface props {
 const Refresh: React.FC<props> = ({ setGrades }) => {
   const [isRefreshing, setRefreshing] = useState(false);
   const [refreshDate, setRefreshDate] = useState<string>();
+
+  const animationState = useAnimationState({
+    hide: {
+      opacity: 0,
+      translateY: -30,
+    },
+    show: {
+      opacity: 1,
+      translateY: 0,
+    },
+  });
 
   useEffect(() => {
     AsyncStorage.getItem("refreshtime").then((time) => {
@@ -21,6 +33,7 @@ const Refresh: React.FC<props> = ({ setGrades }) => {
   // very janky
   const refresh = async () => {
     setRefreshing(true);
+    animationState.transitionTo("hide");
     const user: UserData = JSON.parse(
       (await AsyncStorage.getItem("user")) as string
     );
@@ -54,28 +67,29 @@ const Refresh: React.FC<props> = ({ setGrades }) => {
         setGrades(res[0]);
         setRefreshDate(date);
         setRefreshing(false);
+        animationState.transitionTo("show");
       })
       .catch((err) => {});
   };
 
   return (
-    <TouchableOpacity
-      style={styles.touch}
-      onPress={refresh}
-      disabled={isRefreshing}
-    >
-      <ReloadSvg width={20} fill="#000" />
-      <Text className="font-[PoppinsRegular] text-xs">
-        {refreshDate ? moment(refreshDate).locale("pl").fromNow() : "nigdy"}
-      </Text>
-    </TouchableOpacity>
+    <MotiView style={styles.touch} state={animationState}>
+      <TouchableOpacity
+        onPress={refresh}
+        disabled={isRefreshing}
+        style={{ flexDirection: "row", alignItems: "center" }}
+      >
+        <ReloadSvg width={20} fill="#000" />
+        <Text className="font-[PoppinsRegular] text-xs">
+          {refreshDate ? moment(refreshDate).locale("pl").fromNow() : "nigdy"}
+        </Text>
+      </TouchableOpacity>
+    </MotiView>
   );
 };
 
 const styles = StyleSheet.create({
   touch: {
-    flexDirection: "row",
-    alignItems: "center",
     position: "absolute",
     bottom: 2,
     alignSelf: "center",
