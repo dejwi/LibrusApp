@@ -28,3 +28,25 @@ interface TimetableFreeDay {
 interface Timetable {
   [day: string]: TimetableLesson[] | TimetableFreeDay;
 }
+
+interface Grade {
+  grade: string;
+  weight: number;
+  category: string;
+  teacher: string;
+  comment: string;
+  date: string;
+  isFinal: boolean;
+  isFinalProposition: boolean;
+  isSemester: boolean;
+  isSemesterProposition: boolean;
+  toAverage: boolean;
+}
+
+interface Grades {
+  latest?: { [subject: string]: Grade[] };
+  mostRecent?: { subject: string; grade: Grade };
+  [semester: string]: {
+    [subject: string]: Grade[];
+  };
+}
