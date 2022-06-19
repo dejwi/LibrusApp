@@ -12,7 +12,7 @@ const LessonsList: React.FC<props> = ({ data, selected }) => {
 
   return isFreeDay ? (
     <View className="justify-center items-center flex-1">
-      <Text className="font-[PoppinsRegular] text-lg">
+      <Text className="font-[PoppinsRegular] text-lg text-center">
         {(current as TimetableFreeDay).name}
       </Text>
       <Text
