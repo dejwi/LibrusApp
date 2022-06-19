@@ -5,7 +5,7 @@ import Nav from "../components/Nav";
 import Top from "../components/Timetable/Top/Top";
 import { MainColors } from "../theme";
 import moment from "moment";
-import Lessons from "../components/Timetable/Lessons/Lessons";
+import LessonsList from "../components/Timetable/Lessons/LessonsList";
 import useTimetableUtil from "../hooks/useTimetableUtil";
 
 const Timetable = () => {
@@ -15,7 +15,7 @@ const Timetable = () => {
 
   return (
     <View className="flex-1" style={{ backgroundColor: MainColors.bgPrimary }}>
-      {!currentWeek && !selected && !data ? null : (
+      {!!currentWeek && !!selected && !!data ? (
         <>
           <SeparatedStatusBar />
           <Top
@@ -25,8 +25,10 @@ const Timetable = () => {
               (setSelected as React.Dispatch<React.SetStateAction<string>>)(e)
             }
           />
-          <Lessons selected={selected as string} data={data as Timetable} />
+          <LessonsList selected={selected as string} data={data as Timetable} />
         </>
+      ) : (
+        <Text>Loading...</Text>
       )}
     </View>
   );
