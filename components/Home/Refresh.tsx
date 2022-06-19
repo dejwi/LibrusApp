@@ -18,7 +18,7 @@ const Refresh: React.FC<props> = ({ setGrades }) => {
       if (time) setRefreshDate(time);
     });
   }, []);
-
+  // very janky
   const refresh = async () => {
     setRefreshing(true);
     const user: UserData = JSON.parse(
@@ -26,18 +26,31 @@ const Refresh: React.FC<props> = ({ setGrades }) => {
     );
     Librus(user.Login, user.password)
       .then(async (ses) => {
-        const res = await Promise.all([
+        const day = moment().isoWeekday();
+        const toUpdate = [
           ses.getGrades(true, 7),
           ses.getTimetable(),
           ses.getLuckyNumber(),
-        ]);
+        ];
+        if (day > 5)
+          toUpdate[1] = ses.getTimetable(
+            moment().add("2", "days").startOf("week").format("YYYY-MM-DD")
+          );
+
+        const res = await Promise.all(toUpdate);
         const date = moment().toDate().toString();
-        await Promise.all([
+
+        const toSet = [
           AsyncStorage.setItem("grades", JSON.stringify(res[0])),
           AsyncStorage.setItem("timetable", JSON.stringify(res[1])),
           AsyncStorage.setItem("luckynumber", res[2].toString()),
           AsyncStorage.setItem("refreshtime", date),
-        ]);
+        ];
+        if (day > 5)
+          toSet.push(
+            AsyncStorage.setItem("timetablenext", JSON.stringify(res[1]))
+          );
+        await Promise.all(toSet);
         setGrades(res[0]);
         setRefreshDate(date);
         setRefreshing(false);
