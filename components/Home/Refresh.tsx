@@ -6,7 +6,10 @@ import "moment/locale/pl";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Librus from "librusjs/lib";
 
-const Refresh = () => {
+interface props {
+  setGrades: (val: Grades) => void;
+}
+const Refresh: React.FC<props> = ({ setGrades }) => {
   const [isRefreshing, setRefreshing] = useState(false);
   const [refreshDate, setRefreshDate] = useState<string>();
 
@@ -35,6 +38,7 @@ const Refresh = () => {
           AsyncStorage.setItem("luckynumber", res[2].toString()),
           AsyncStorage.setItem("refreshtime", date),
         ]);
+        setGrades(res[0]);
         setRefreshDate(date);
         setRefreshing(false);
       })

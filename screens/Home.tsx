@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <View className="flex-1" style={{ backgroundColor: MainColors.bgPrimary }}>
       <SeparatedStatusBar />
-      <Top />
+      <Top setGrades={(val) => setGrades(val)} />
       <View className="items-center mt-6 flex-1">
         {/* <CurrentLesson /> */}
         {!!grades && <LatestGrade grades={grades} />}
