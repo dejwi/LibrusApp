@@ -1,31 +1,31 @@
 import { View, Text } from "react-native";
 import React, { useState } from "react";
-import useCurrentWeek from "../hooks/useCurrentWeek";
 import SeparatedStatusBar from "../components/SeparatedStatusBar";
 import Nav from "../components/Nav";
 import Top from "../components/Timetable/Top/Top";
 import { MainColors } from "../theme";
 import moment from "moment";
 import Lessons from "../components/Timetable/Lessons/Lessons";
+import useTimetableUtil from "../hooks/useTimetableUtil";
 
 const Timetable = () => {
   // week days in month
-  const [currentWeek] = useCurrentWeek();
+  const [currentWeek, selected, setSelected, data] = useTimetableUtil();
   // 1-5 week day
-  const day = moment().format("YYYY-MM-DD");
-  const [selected, setSelected] = useState(day);
 
   return (
     <View className="flex-1" style={{ backgroundColor: MainColors.bgPrimary }}>
-      {!currentWeek ? null : (
+      {!currentWeek && !selected && !data ? null : (
         <>
           <SeparatedStatusBar />
           <Top
-            days={currentWeek}
-            selected={selected}
-            setSelected={(e) => setSelected(e)}
+            days={currentWeek as string[]}
+            selected={selected as string}
+            setSelected={(e) =>
+              (setSelected as React.Dispatch<React.SetStateAction<string>>)(e)
+            }
           />
-          <Lessons selected={selected} />
+          <Lessons selected={selected as string} data={data as Timetable} />
         </>
       )}
     </View>

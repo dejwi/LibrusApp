@@ -5,14 +5,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface props {
   selected: string;
+  data: Timetable;
 }
-const Lessons: React.FC<props> = ({ selected }) => {
-  const [data, setData] = useState<Timetable>();
+const Lessons: React.FC<props> = ({ selected, data }) => {
 
   useEffect(() => {
-    AsyncStorage.getItem("timetable").then((tt) => {
-      if (tt) setData(JSON.parse(tt));
-    });
+    
   }, []);
 
   return (
