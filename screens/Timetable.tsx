@@ -7,6 +7,7 @@ import { MainColors } from "../theme";
 import moment from "moment";
 import LessonsList from "../components/Timetable/Lessons/LessonsList";
 import useTimetableUtil from "../hooks/useTimetableUtil";
+import { MotiView } from "moti";
 
 const Timetable = () => {
   // week days in month
@@ -15,20 +16,28 @@ const Timetable = () => {
 
   return (
     <View className="flex-1" style={{ backgroundColor: MainColors.bgPrimary }}>
-      {!!currentWeek && !!selected && !!data ? (
+      <SeparatedStatusBar />
+      {!!currentWeek && !!selected && !!data && (
         <>
-          <SeparatedStatusBar />
-          <Top
-            days={currentWeek as string[]}
-            selected={selected as string}
-            setSelected={(e) =>
-              (setSelected as React.Dispatch<React.SetStateAction<string>>)(e)
-            }
-          />
-          <LessonsList selected={selected as string} data={data as Timetable} />
+          <MotiView
+            className="flex-1"
+            from={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ type: "timing", duration: 150 }}
+          >
+            <Top
+              days={currentWeek as string[]}
+              selected={selected as string}
+              setSelected={(e) =>
+                (setSelected as React.Dispatch<React.SetStateAction<string>>)(e)
+              }
+            />
+            <LessonsList
+              selected={selected as string}
+              data={data as Timetable}
+            />
+          </MotiView>
         </>
-      ) : (
-        <Text>Loading...</Text>
       )}
     </View>
   );
