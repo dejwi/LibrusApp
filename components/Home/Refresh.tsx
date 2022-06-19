@@ -5,7 +5,7 @@ import moment from "moment";
 import "moment/locale/pl";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Librus from "librusjs/lib";
-import { useAnimationState, MotiView } from "moti";
+import { MotiView } from "moti";
 
 interface props {
   setGrades: (val: Grades) => void;
@@ -13,17 +13,6 @@ interface props {
 const Refresh: React.FC<props> = ({ setGrades }) => {
   const [isRefreshing, setRefreshing] = useState(false);
   const [refreshDate, setRefreshDate] = useState<string>();
-
-  const animationState = useAnimationState({
-    hide: {
-      opacity: 0,
-      translateY: -30,
-    },
-    show: {
-      opacity: 1,
-      translateY: 0,
-    },
-  });
 
   useEffect(() => {
     AsyncStorage.getItem("refreshtime").then((time) => {
@@ -33,7 +22,6 @@ const Refresh: React.FC<props> = ({ setGrades }) => {
   // very janky
   const refresh = async () => {
     setRefreshing(true);
-    animationState.transitionTo("hide");
     const user: UserData = JSON.parse(
       (await AsyncStorage.getItem("user")) as string
     );
@@ -67,13 +55,18 @@ const Refresh: React.FC<props> = ({ setGrades }) => {
         setGrades(res[0]);
         setRefreshDate(date);
         setRefreshing(false);
-        animationState.transitionTo("show");
       })
       .catch((err) => {});
   };
 
   return (
-    <MotiView style={styles.touch} state={animationState}>
+    <MotiView
+      style={styles.touch}
+      animate={{
+        opacity: isRefreshing ? 0 : 1,
+        translateY: isRefreshing ? -20 : 0,
+      }}
+    >
       <TouchableOpacity
         onPress={refresh}
         disabled={isRefreshing}
