@@ -16,3 +16,13 @@ export const TimetableColors = {
   arrowRight: "#7673FF",
   arrowBack: "#7F46F8",
 };
+
+export const LastGradesColors = [
+  "#b8bab9",
+  "#FC8383",
+  "#FFC85E",
+  "#FCFF5E",
+  "#8BF596",
+  "#4AF55B",
+  "#4AF55B",
+];

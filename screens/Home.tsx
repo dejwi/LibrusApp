@@ -6,6 +6,7 @@ import Top from "../components/Home/Top";
 import CurrentLesson from "../components/Home/CurrentLesson";
 import LatestGrade from "../components/Home/LatestGrade";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LastGrades from "../components/Home/LastGrades";
 
 import { MainColors } from "../theme";
 
@@ -22,9 +23,14 @@ const Home = () => {
     <View className="flex-1" style={{ backgroundColor: MainColors.bgPrimary }}>
       <SeparatedStatusBar />
       <Top setGrades={(val) => setGrades(val)} />
-      <View className="items-center mt-6 flex-1">
+      <View className="items-center flex-1">
         {/* <CurrentLesson /> */}
-        {!!grades && <LatestGrade grades={grades} />}
+        {!!grades && (
+          <>
+            <LatestGrade grades={grades} />
+            <LastGrades grades={grades} />
+          </>
+        )}
       </View>
     </View>
   );
