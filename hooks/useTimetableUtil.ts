@@ -20,6 +20,7 @@ const useTimetableUtil = () => {
       AsyncStorage.getItem("timetablenext").then(async (tt) => {
         if (tt) {
           const ttj: Timetable = JSON.parse(tt);
+          // is actually next week
           if (ttj[weekDays[0]]) return setData(ttj);
         }
 
