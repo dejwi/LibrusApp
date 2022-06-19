@@ -44,8 +44,8 @@ interface Grade {
 }
 
 interface Grades {
-  latest?: { [subject: string]: Grade[] };
-  mostRecent?: { subject: string; grade: Grade };
+  latest: { [subject: string]: Grade[] };
+  mostRecent: { subject: string; grade: Grade };
   [semester: string]: {
     [subject: string]: Grade[];
   };
