@@ -42,7 +42,7 @@ const Nav = () => {
             fill={path === "Home" ? NavColors.selected : NavColors.default}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => goTo("Home")}>
+        <TouchableOpacity onPress={() => goTo("Grades")}>
           <GradesIcon
             width={sizeSide}
             height={sizeSide}
