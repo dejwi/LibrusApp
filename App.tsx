@@ -10,6 +10,7 @@ import Timetable from "./screens/Timetable";
 import Login from "./screens/Login";
 import Loading from "./screens/Loading";
 import Nav from "./components/Nav";
+import Grades from "./screens/Grades";
 
 const Stack = createStackNavigator();
 const theme = {
@@ -34,13 +35,15 @@ export default function App() {
     <TailwindProvider>
       <NavigationContainer theme={theme}>
         <Stack.Navigator
-          screenOptions={{ headerShown: false, animationEnabled: false }}
+          screenOptions={{ headerShown: false }}
           initialRouteName="Loading"
         >
           <Stack.Screen name="Loading" component={Loading} />
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Home" component={Home} />
+
           <Stack.Screen name="Timetable" component={Timetable} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Grades" component={Grades} />
         </Stack.Navigator>
         <Nav />
       </NavigationContainer>
