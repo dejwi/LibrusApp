@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import { MainColors, LastGradesColors } from "../../theme";
+import GradeColored from "../GradeColored";
 
 const LastGrades: React.FC<props> = ({ grades }) => {
   return (
@@ -30,31 +31,15 @@ const LastGrades: React.FC<props> = ({ grades }) => {
 };
 
 const GradeSection: React.FC<props2> = ({ subject, grades }) => {
-  const upSubject = subject.charAt(0).toUpperCase() + subject.slice(1);
-  const trimSubject = truncate(upSubject, 23);
+  const trimSubject = truncate(subject.toLowerCase(), 23);
   return (
     <View className="flex-row items-center py-3 px-2">
       <Text className="font-[PoppinsRegular]">{trimSubject}</Text>
       <View className="flex-row ml-1">
         {grades.map((g, index) => (
-          <Grade grade={g.grade} key={subject + index} />
+          <GradeColored grade={g.grade} key={subject + index} />
         ))}
       </View>
-    </View>
-  );
-};
-
-const Grade: React.FC<{ grade: string }> = ({ grade }) => {
-  // leave only numbers
-  const filtered = grade.replace(/\D/g, "");
-  const color =
-    filtered && +filtered <= 6
-      ? LastGradesColors[+filtered as number]
-      : LastGradesColors[0];
-
-  return (
-    <View style={{ backgroundColor: color, marginLeft: 8, borderRadius: 3 }}>
-      <Text className="font-[PoppinsRegular] w-6 text-center">{grade}</Text>
     </View>
   );
 };
