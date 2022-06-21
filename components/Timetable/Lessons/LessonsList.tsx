@@ -1,14 +1,30 @@
 import { View, Text, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
-import { MainColors } from "../../../theme";
+import { MainColors, TimetableColors } from "../../../theme";
 import Hour from "./Hour";
+import moment from "moment";
 
 const LessonsList: React.FC<props> = ({ data, selected }) => {
   const current = data[selected];
   // ts was mad
   const isFreeDay = current.hasOwnProperty("isFreeDay");
 
-  useEffect(() => {}, [selected]);
+  let helper = true;
+  const colorNow = (date: string) => {
+    if (!helper) return false;
+    // selected date is not today
+    if (!moment().isSame(moment(selected), "d")) {
+      helper = false;
+      return false;
+    }
+    const dd = moment.utc(date, "HH:mm");
+    const now = moment.utc(moment().format("HH:mm"), "HH:mm");
+    if (dd.diff(now, "minutes") > 0) {
+      helper = false;
+      return true;
+    }
+    return false;
+  };
 
   return (
     <View className="flex-1 mt-3.5 flex-row">
@@ -38,9 +54,14 @@ const LessonsList: React.FC<props> = ({ data, selected }) => {
                   room={les.room}
                   isCanceled={les.isCanceled}
                   isSubstitutionClass={les.isSubstitutionClass}
+                  bg={
+                    colorNow(les.hourTo)
+                      ? TimetableColors.nowLesson
+                      : MainColors.bgSecondary
+                  }
                 />
               ) : (
-                <Lesson name="" room="" />
+                <Lesson name="" room="" bg={MainColors.bgSecondary} />
               )}
             </View>
           ))}
@@ -55,9 +76,10 @@ const Lesson: React.FC<props2> = ({
   room,
   isCanceled,
   isSubstitutionClass,
+  bg,
 }) => (
   <View
-    style={{ backgroundColor: MainColors.bgSecondary, borderRadius: 6 }}
+    style={{ backgroundColor: bg, borderRadius: 6 }}
     className="pl-4 justify-center flex-1 mr-3.5 py-3"
   >
     <Text
@@ -103,4 +125,5 @@ interface props2 {
   room: string;
   isCanceled?: boolean;
   isSubstitutionClass?: boolean;
+  bg: string;
 }

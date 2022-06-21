@@ -15,6 +15,7 @@ export const TimetableColors = {
   selected: "#6C54FE",
   arrowRight: "#7673FF",
   arrowBack: "#7F46F8",
+  nowLesson: "#EDEFFF",
 };
 
 export const LastGradesColors = [
