@@ -41,7 +41,11 @@ export default function App() {
           <Stack.Screen name="Loading" component={Loading} />
           <Stack.Screen name="Login" component={Login} />
 
-          <Stack.Screen name="Timetable" component={Timetable} />
+          <Stack.Screen
+            name="Timetable"
+            component={Timetable}
+            options={{ gestureDirection: "horizontal-inverted" }}
+          />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Grades" component={Grades} />
         </Stack.Navigator>
