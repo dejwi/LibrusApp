@@ -35,7 +35,7 @@ export default function App() {
     <TailwindProvider>
       <NavigationContainer theme={theme}>
         <Stack.Navigator
-          screenOptions={{ headerShown: false }}
+          screenOptions={{ headerShown: false, gestureEnabled: false }}
           initialRouteName="Loading"
         >
           <Stack.Screen name="Loading" component={Loading} />
