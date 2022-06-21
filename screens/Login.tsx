@@ -28,6 +28,8 @@ const Login = () => {
         const data: UserData = { ...acc, password };
         await AsyncStorage.setItem("user", JSON.stringify(data));
         navigation.navigate("Home" as never);
+        setShowErr(false);
+        setDisabled(false);
       })
       .catch((err) => {
         setShowErr(true);

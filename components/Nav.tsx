@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import HomeIcon from "../assets/svgs/home.svg";
 import TimetableIcon from "../assets/svgs/timetable.svg";
@@ -10,7 +10,7 @@ import { NavColors } from "../theme";
 
 type routes = "Home" | "Timetable" | "Grades";
 
-const Nav = () => {
+const Nav: React.FC<{ show: boolean }> = ({ show }) => {
   const [path, setPath] = useState<routes>("Home");
   const navigation = useNavigation();
   const sizeHome = 36;
@@ -21,7 +21,7 @@ const Nav = () => {
     setPath(route);
   };
 
-  return (
+  return show ? (
     <SafeAreaView
       className={`w-full`}
       style={{ backgroundColor: NavColors.bg }}
@@ -51,7 +51,7 @@ const Nav = () => {
         </TouchableOpacity>
       </View>
     </SafeAreaView>
-  );
+  ) : null;
 };
 
 export default Nav;
