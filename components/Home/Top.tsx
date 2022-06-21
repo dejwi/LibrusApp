@@ -17,10 +17,10 @@ const Top: React.FC<props> = ({ setGrades }) => {
 
   return (
     <View
-      className="bg-white pb-12 "
+      className="bg-white pb-10 "
       style={{ borderBottomLeftRadius: 25, borderBottomRightRadius: 25 }}
     >
-      <Text className="font-[PoppinsRegular] text-3xl mt-8 ml-1">
+      <Text className="font-[PoppinsRegular] text-3xl mt-8 ml-2">
         {!!user && `Witaj ${user.FirstName}`}
       </Text>
       <Refresh setGrades={setGrades} />
