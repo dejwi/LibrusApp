@@ -21,13 +21,18 @@ const Nav: React.FC<{ show: boolean }> = ({ show }) => {
     setPath(route);
   };
 
+  const touchst = {
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+  };
+
   return show ? (
     <SafeAreaView
       className={`w-full`}
       style={{ backgroundColor: NavColors.bg }}
     >
       <View className={`flex-row items-center justify-evenly pt-3`}>
-        <TouchableOpacity onPress={() => goTo("Timetable")}>
+        <TouchableOpacity onPress={() => goTo("Timetable")} style={touchst}>
           <TimetableIcon
             width={sizeSide}
             height={sizeSide}
@@ -35,14 +40,14 @@ const Nav: React.FC<{ show: boolean }> = ({ show }) => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => goTo("Home")}>
+        <TouchableOpacity onPress={() => goTo("Home")} style={touchst}>
           <HomeIcon
             width={sizeHome}
             height={sizeHome}
             fill={path === "Home" ? NavColors.selected : NavColors.default}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => goTo("Grades")}>
+        <TouchableOpacity onPress={() => goTo("Grades")} style={touchst}>
           <GradesIcon
             width={sizeSide}
             height={sizeSide}
