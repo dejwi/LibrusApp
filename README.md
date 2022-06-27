@@ -1,6 +1,11 @@
 # Librus App
 
-React native based Librus-gradebook app.
+React Native based Librus-gradebook app.
+
+## Preview
+![libru](https://user-images.githubusercontent.com/80927085/175992399-dfa06987-52fd-47fa-8580-74b30885f3e3.gif)
+
+<sub><sup>^test data</sup></sub>
 
 ## Functionality
 
