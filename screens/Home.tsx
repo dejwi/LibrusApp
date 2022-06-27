@@ -27,8 +27,8 @@ const Home = () => {
         {/* <CurrentLesson /> */}
         {!!grades && (
           <>
-            <LatestGrade grades={grades} />
-            <LastGrades grades={grades} />
+            {!!grades.mostRecent && <LatestGrade grades={grades} />}
+            {!!grades.latest && <LastGrades grades={grades} />}
           </>
         )}
       </View>
